@@ -4,11 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Models\User;
 
 class RoleSeeder extends Seeder
 {
     public function run(): void
     {
+        // Reset cache permission
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
+        // Daftar role
         $roles = [
             'admin',
             'kepala_sekolah',
@@ -17,11 +23,11 @@ class RoleSeeder extends Seeder
             'guru_pembimbing',
             'guru_penguji',
             'siswa',
-            'pembimbing_dudi',
+            'dudi',
         ];
 
         foreach ($roles as $role) {
-            Role::create(['name' => $role]);
+            Role::firstOrCreate(['name' => $role, 'guard_name' => 'web']);
         }
     }
 }
