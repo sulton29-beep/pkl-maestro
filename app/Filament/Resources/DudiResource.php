@@ -3,59 +3,86 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\DudiResource\Pages;
-use App\Filament\Resources\DudiResource\RelationManagers;
 use App\Models\Dudi;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class DudiResource extends Resource
 {
     protected static ?string $model = Dudi::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-building-office';
+
+    protected static ?string $navigationLabel = 'DUDI';
+
+    protected static ?string $modelLabel = 'DUDI';
+
+    protected static ?string $pluralModelLabel = 'DUDI';
+
+    protected static ?string $navigationGroup = 'PKL';
+
+    protected static ?int $navigationSort = 1;
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()?->hasAnyRole(['admin', 'waka_kurikulum', 'kaprodi', 'guru_pembimbing']) ?? false;
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_perusahaan')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('bidang_usaha')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\Textarea::make('alamat')
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('kota')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('kontak_person')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('no_hp')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('kuota')
-                    ->required()
-                    ->numeric()
-                    ->default(0),
-                Forms\Components\TextInput::make('latitude')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('longitude')
-                    ->numeric()
-                    ->default(null),
+                Forms\Components\Section::make('Informasi Perusahaan')
+                    ->schema([
+                        Forms\Components\TextInput::make('nama_perusahaan')
+                            ->label('Nama Perusahaan')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('bidang_usaha')
+                            ->label('Bidang Usaha')
+                            ->maxLength(255),
+                        Forms\Components\Textarea::make('alamat')
+                            ->label('Alamat')
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('kota')
+                            ->label('Kota')
+                            ->maxLength(255),
+                    ])->columns(2),
+
+                Forms\Components\Section::make('Kontak & Kuota')
+                    ->schema([
+                        Forms\Components\TextInput::make('kontak_person')
+                            ->label('Kontak Person')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('no_hp')
+                            ->label('No. HP')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('email')
+                            ->label('Email')
+                            ->email()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('kuota')
+                            ->label('Kuota Siswa')
+                            ->numeric()
+                            ->default(0),
+                    ])->columns(2),
+
+                Forms\Components\Section::make('Lokasi GPS (untuk absensi)')
+                    ->schema([
+                        Forms\Components\TextInput::make('latitude')
+                            ->label('Latitude')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('longitude')
+                            ->label('Longitude')
+                            ->numeric(),
+                    ])->columns(2),
+
                 Forms\Components\Toggle::make('is_active')
-                    ->required(),
+                    ->label('Aktif')
+                    ->default(true),
             ]);
     }
 
@@ -64,42 +91,24 @@ class DudiResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama_perusahaan')
+                    ->label('Nama Perusahaan')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('bidang_usaha')
+                    ->label('Bidang')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('kota')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('kontak_person')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('no_hp')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
+                    ->label('Kota')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('kuota')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('latitude')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('longitude')
-                    ->numeric()
-                    ->sortable(),
+                    ->label('Kuota')
+                    ->badge(),
                 Tables\Columns\IconColumn::make('is_active')
+                    ->label('Aktif')
                     ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
