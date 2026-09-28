@@ -27,6 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('PKL SMKS MAESTRO')
             ->colors([
                 'primary' => Color::Amber,
             ])
@@ -53,6 +54,10 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->renderHook(
+                'panels::head.start',
+                fn () => view('filament.hooks.csrf-meta'),
+            );
     }
 }

@@ -31,4 +31,9 @@ class Siswa extends Model
     {
         return $this->belongsTo(Jurusan::class);
     }
+
+    public function penempatanPkl()
+    {
+        return $this->hasMany(PenempatanPkl::class);
+    }
 }

@@ -24,11 +24,19 @@ class RoleSeeder extends Seeder
             'view_any_siswa', 'create_siswa', 'update_siswa', 'delete_siswa',
             'view_any_dudi', 'create_dudi', 'update_dudi', 'delete_dudi',
 
-            // PKL
+            // PKL - Penempatan
             'view_any_penempatan', 'create_penempatan', 'update_penempatan', 'delete_penempatan',
-            'view_any_logbook', 'create_logbook', 'update_logbook', 'delete_logbook', 'verify_logbook',
-            'view_absensi', 'create_absensi',
+
+            // PKL - Logbook
+            'view_any_logbook', 'view_logbook', 'create_logbook', 'update_logbook', 'delete_logbook', 'verify_logbook',
+
+            // PKL - Absensi
+            'view_any_absensi', 'view_absensi', 'create_absensi', 'update_absensi', 'delete_absensi',
+
+            // PKL - Nilai
             'view_nilai', 'input_nilai_dudi', 'input_nilai_sekolah', 'input_nilai_sidang',
+
+            // PKL - Sertifikat & Laporan
             'view_sertifikat', 'generate_sertifikat',
             'view_laporan', 'approve_laporan',
             'view_audit_trail',
@@ -59,15 +67,16 @@ class RoleSeeder extends Seeder
                 'view_any_guru',
                 'view_any_dudi', 'create_dudi', 'update_dudi',
                 'view_any_penempatan', 'create_penempatan', 'update_penempatan',
-                'view_logbook', 'verify_logbook',
+                'view_any_logbook', 'view_logbook', 'verify_logbook',
+                'view_any_absensi', 'view_absensi',
                 'view_nilai', 'view_laporan', 'view_sertifikat',
             ],
 
             'guru_pembimbing' => [
                 'view_any_siswa', 'view_any_dudi',
                 'view_any_penempatan',
-                'view_any_logbook', 'verify_logbook',
-                'view_absensi',
+                'view_any_logbook', 'view_logbook', 'verify_logbook',
+                'view_any_absensi', 'view_absensi',
                 'view_nilai', 'input_nilai_sekolah',
                 'view_laporan',
             ],
@@ -78,15 +87,15 @@ class RoleSeeder extends Seeder
             ],
 
             'siswa' => [
-                'view_any_logbook', 'create_logbook', 'update_logbook',
-                'view_absensi', 'create_absensi',
+                'view_any_logbook', 'view_logbook', 'create_logbook', 'update_logbook',
+                'view_any_absensi', 'view_absensi', 'create_absensi',
                 'view_nilai', 'view_sertifikat',
             ],
 
             'dudi' => [
                 'view_any_siswa', 'view_any_penempatan',
-                'view_any_logbook', 'verify_logbook',
-                'view_absensi',
+                'view_any_logbook', 'view_logbook', 'verify_logbook',
+                'view_any_absensi', 'view_absensi',
                 'view_nilai', 'input_nilai_dudi',
                 'view_sertifikat',
             ],
