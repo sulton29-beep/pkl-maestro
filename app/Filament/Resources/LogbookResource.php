@@ -128,6 +128,14 @@ class LogbookResource extends Resource
                     ->dateTime('d M Y H:i')
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
+            ->headerActions([
+                Tables\Actions\Action::make('export')
+                    ->label('Export Excel')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->color('success')
+                    ->url(fn () => route('export-excel.logbook'))
+                    ->openUrlInNewTab(),
+            ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->label('Filter Status')

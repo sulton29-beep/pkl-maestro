@@ -1,0 +1,37 @@
+[23-Sep-2026 21:54:50 Asia/Jakarta] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/pklmaest/public_html/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/pklmaest/public_html/vendor/composer/autoload_real.php(25): require()
+#1 /home/pklmaest/public_html/vendor/autoload.php(22): ComposerAutoloaderInit53b5d56b3b7e3cbac1713e68c8850f6c::getLoader()
+#2 /home/pklmaest/public_html/artisan(10): require('/home/pklmaest/...')
+#3 {main}
+  thrown in /home/pklmaest/public_html/vendor/composer/platform_check.php on line 22
+[23-Sep-2026 23:04:15 Asia/Jakarta] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/pklmaest/public_html/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/pklmaest/public_html/vendor/composer/autoload_real.php(25): require()
+#1 /home/pklmaest/public_html/vendor/autoload.php(22): ComposerAutoloaderInit53b5d56b3b7e3cbac1713e68c8850f6c::getLoader()
+#2 /home/pklmaest/public_html/index.php(14): require('/home/pklmaest/...')
+#3 {main}
+  thrown in /home/pklmaest/public_html/vendor/composer/platform_check.php on line 22
+[23-Sep-2026 23:04:16 Asia/Jakarta] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/pklmaest/public_html/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/pklmaest/public_html/vendor/composer/autoload_real.php(25): require()
+#1 /home/pklmaest/public_html/vendor/autoload.php(22): ComposerAutoloaderInit53b5d56b3b7e3cbac1713e68c8850f6c::getLoader()
+#2 /home/pklmaest/public_html/index.php(14): require('/home/pklmaest/...')
+#3 {main}
+  thrown in /home/pklmaest/public_html/vendor/composer/platform_check.php on line 22
+[28-Sep-2026 13:36:58 Asia/Jakarta] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/pklmaest/public_html/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/pklmaest/public_html/vendor/composer/autoload_real.php(25): require()
+#1 /home/pklmaest/public_html/vendor/autoload.php(22): ComposerAutoloaderInit53b5d56b3b7e3cbac1713e68c8850f6c::getLoader()
+#2 /home/pklmaest/public_html/artisan(10): require('/home/pklmaest/...')
+#3 {main}
+  thrown in /home/pklmaest/public_html/vendor/composer/platform_check.php on line 22
+[28-Sep-2026 13:37:32 Asia/Jakarta] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.1.34. in /home/pklmaest/public_html/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home/pklmaest/public_html/vendor/composer/autoload_real.php(25): require()
+#1 /home/pklmaest/public_html/vendor/autoload.php(22): ComposerAutoloaderInit53b5d56b3b7e3cbac1713e68c8850f6c::getLoader()
+#2 /home/pklmaest/public_html/artisan(10): require('/home/pklmaest/...')
+#3 {main}
+  thrown in /home/pklmaest/public_html/vendor/composer/platform_check.php on line 22
+[14-Oct-2026 20:58:00 Asia/Jakarta] PHP Fatal error:  Cannot declare class App\Filament\Resources\TahunAjaranResource, because the name is already in use in /home/pklmaest/public_html/app/Filament/Resources/TahunAjaranResource/TahunAjaranResource.php on line 13
+[14-Oct-2026 20:58:08 Asia/Jakarta] PHP Fatal error:  Cannot declare class App\Filament\Resources\TahunAjaranResource, because the name is already in use in /home/pklmaest/public_html/app/Filament/Resources/TahunAjaranResource/TahunAjaranResource.php on line 13

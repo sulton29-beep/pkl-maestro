@@ -9,6 +9,8 @@ class Guru extends Model
 {
     use HasFactory;
 
+    protected $table = 'gurus';
+
     protected $fillable = [
         'user_id',
         'nip',
@@ -21,5 +23,15 @@ class Guru extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function penempatanSebagaiPembimbing()
+    {
+        return $this->hasMany(PenempatanPkl::class, 'guru_pembimbing_id');
+    }
+
+    public function penempatanSebagaiPenguji()
+    {
+        return $this->hasMany(PenempatanPkl::class, 'guru_penguji_id');
     }
 }

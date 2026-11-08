@@ -8,6 +8,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ImportAction;
 use Filament\Tables\Table;
 
 class GuruResource extends Resource
@@ -81,6 +82,25 @@ class GuruResource extends Resource
                 Tables\Columns\TextColumn::make('no_hp')
                     ->label('No. HP')
                     ->searchable(),
+            ])
+            ->headerActions([
+                Tables\Actions\Action::make('export')
+                    ->label('Export Excel')
+                    ->icon('heroicon-o-arrow-down-tray')
+                    ->color('success')
+                    ->url(fn () => route('export-excel.guru'))
+                    ->openUrlInNewTab(),
+                ImportAction::make()
+                    ->importer(\App\Filament\Imports\GuruImporter::class)
+                    ->label('Import CSV')
+                    ->icon('heroicon-o-arrow-up-tray')
+                    ->color('warning'),
+                Tables\Actions\Action::make('template')
+                    ->label('Template CSV')
+                    ->icon('heroicon-o-document-arrow-down')
+                    ->color('info')
+                    ->url(fn () => route('import-template.download', ['type' => 'guru']))
+                    ->openUrlInNewTab(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

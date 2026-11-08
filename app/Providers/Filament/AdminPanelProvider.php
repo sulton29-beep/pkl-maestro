@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Models\PengaturanUmum;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -16,21 +17,45 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        // Ambil setting dari DB (safe kalau tabel belum ada)
+        $setting = Schema::hasTable('pengaturan_umums')
+            ? PengaturanUmum::first()
+            : null;
+
+        // Warna utama (fallback: Amber)
+        $primary = $setting?->warna_utama;
+        $colorPrimary = ($primary && preg_match('/^#[0-9a-fA-F]{6}$/', $primary))
+            ? Color::hex($primary)
+            : Color::Amber;
+
+        // Warna sekunder (fallback: Blue)
+        $secondary = $setting?->warna_sekunder;
+        $colorSecondary = ($secondary && preg_match('/^#[0-9a-fA-F]{6}$/', $secondary))
+            ? Color::hex($secondary)
+            : Color::Blue;
+
         return $panel
             ->default()
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandName('PKL SMKS MAESTRO')
+            ->brandName($setting?->nama_aplikasi ?? 'PKL SMKS MAESTRO')
+            ->brandLogo(fn () => $setting?->logo_url)
+            ->brandLogoHeight('2.5rem')
+            ->favicon(fn () => $setting?->favicon_url)
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => $colorPrimary,
+                'warning' => $colorSecondary,
             ])
+            ->databaseNotifications()
+            ->databaseNotificationsPolling('10s')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
